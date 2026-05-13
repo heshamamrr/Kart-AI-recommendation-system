@@ -1,0 +1,17 @@
+# UI
+gradio>=4.44.0
+
+# LLM + Embeddings via Ollama
+ollama>=0.3.0
+
+# Vector Database
+chromadb>=0.5.0
+
+# Data Analysis Agent
+pandas>=2.2.0
+numpy>=1.26.0
+
+# Utilities
+python-dotenv>=1.0.0
+
+tqdm>=4.66.0
