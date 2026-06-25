@@ -1,10 +1,73 @@
-Kart AI is a locally-deployed, hallucination-resistant recommendation system designed for e-commerce. It leverages a multi-agent architecture to combine the natural language reasoning of Large Language Models (LLMs) with the strict accuracy of Retrieval-Augmented Generation (RAG) and structured data analysis.  The project addresses a critical "scientific gap" in modern AI: the tendency for generative models to "hallucinate" or invent products that do not exist in a store's inventory. Key Features Multi-Agent Routing: Automatically classifies user intent into search, analytical, or conversational queries with 99.4% accuracy.  Zero-Hallucination Retrieval: Ensures all recommendations map exclusively to existing inventory items.  Hybrid Search: Combines semantic RAG search for descriptive queries with Pandas-based analytical processing for price and category filtering.  Privacy-First & Local: Operates entirely on local hardware without cloud APIs, ensuring user data privacy.  Architecture: The system decouples reasoning from retrieval through four core components:  LLM Router: The "brain" that classifies queries and formats final natural language responses.  RAG Search Agent: Executes semantic similarity searches over a vector database.  Data Analyst Agent: Performs complex calculations (averages, rankings, price filtering) using structured CSV data.  Product Knowledge Base: A dual-representation store containing both vector embeddings and tabular product data.  Tech Stack: LLM Runtime: Ollama   Models: Qwen 3.5 (4b) for reasoning, Nomic-embed-text-v2 for vectorization   Vector Database: ChromaDB   Data Processing: Pandas   UI Framework: Streamlit    Installation & Setup: 1. PrerequisitesEnsure you have Python 3.10+ and Ollama installed on your local machine.  2. Environment SetupBash# Create and activate a virtual environment
+# Kart AI
+
+A locally-deployed, hallucination-resistant recommendation system for e-commerce. Kart AI uses a multi-agent architecture to combine LLM reasoning with RAG and structured data analysis, ensuring every recommendation maps to a real product in the inventory.
+
+---
+
+## The Problem
+
+Generative models frequently "hallucinate" — recommending products that don't exist. Kart AI addresses this by routing queries through specialized agents that only return verified, inventory-backed results.
+
+---
+
+## Features
+
+- **Multi-agent routing** — classifies queries as search, analytical, or conversational (99.4% accuracy)
+- **Zero hallucination** — all recommendations are grounded in real inventory data
+- **Hybrid search** — semantic RAG for descriptive queries, Pandas-based filtering for price/category
+- **Fully local** — no cloud APIs, runs entirely on your own hardware
+
+---
+
+## Architecture
+
+Four core components:
+
+- **LLM Router** — classifies intent and formats the final response
+- **RAG Search Agent** — runs semantic similarity search over the vector database
+- **Data Analyst Agent** — handles calculations, rankings, and price filtering via CSV
+- **Product Knowledge Base** — stores both vector embeddings and tabular product data
+
+---
+
+## Tech Stack
+
+- **LLM Runtime:** Ollama
+- **Models:** Qwen 3.5 (4B) for reasoning, nomic-embed-text-v2-moe for embeddings
+- **Vector DB:** ChromaDB
+- **Data processing:** Pandas
+- **UI:** Streamlit
+
+---
+
+## Setup
+
+**Prerequisites:** Python 3.10+ and [Ollama](https://ollama.com) installed.
+
+```bash
+# 1. Create and activate a virtual environment
 python -m venv venv
-venv\Scripts\activate  # Windows
-source venv/bin/activate # Mac/Linux
-  3. Install DependenciesBashpip install -r requirements.txt
-  4. Pull Required ModelsBashollama pull qwen3.5:4b
+venv\Scripts\activate        # Windows
+source venv/bin/activate     # macOS / Linux
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Pull the required models
+ollama pull qwen3.5:4b
 ollama pull nomic-embed-text-v2-moe
-  5. Ingest Knowledge BaseIngest the product dataset (e.g., the cleaned Flipkart dataset with ~20,000 entries) into ChromaDB:  Bashpython knowledge_base.py
-  6. Launch the AppBashstreamlit run app.py
- Citation & CreditsThis project was developed as a Bachelor Thesis at the German University in Cairo (GUC).  Author: Hesham Amr Mohamed El-Nabawy
+
+# 4. Ingest the product dataset into ChromaDB
+python knowledge_base.py
+
+# 5. Run the app
+streamlit run app.py
+```
+
+---
+
+## Citation
+
+Developed as a Bachelor's Thesis at the German University in Cairo (GUC).  
+**Author:** Hesham Amr Mohamed El-Nabawy
+
